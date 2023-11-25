@@ -25,8 +25,8 @@ A local diffing tool for decompilation projects. Inspired by [decomp.me](https:/
 
 objdiff is designed to provide a high-level view of the entire project and fast iteration while matching.
 
-<a href="https://github.com/encounter/objdiff/blob/main/assets/screen-symbols.png" target="_blank"><img src="https://github.com/encounter/objdiff/raw/main/assets/screen-symbols.png" alt="Symbol Screenshot" style="max-width: 40%;" class="inline"></a>
-<a href="https://github.com/encounter/objdiff/blob/main/assets/screen-diff.png" target="_blank"><img src="https://github.com/encounter/objdiff/raw/main/assets/screen-diff.png" alt="Diff Screenshot" style="max-width: 40%;" class="inline"></a>
+<a href="https://github.com/encounter/objdiff/blob/main/assets/screen-symbols.png" target="_blank"><img src="https://raw.githubusercontent.com/encounter/objdiff/main/assets/screen-symbols.png" alt="Symbol Screenshot" style="max-width: 40%;" class="inline"></a>
+<a href="https://github.com/encounter/objdiff/blob/main/assets/screen-diff.png" target="_blank"><img src="https://raw.githubusercontent.com/encounter/objdiff/main/assets/screen-diff.png" alt="Diff Screenshot" style="max-width: 40%;" class="inline"></a>
 
 ### [aurora](https://github.com/encounter/aurora)
 
