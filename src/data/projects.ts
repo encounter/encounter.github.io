@@ -37,12 +37,11 @@ export const projects: Project[] = [
     name: 'objdiff',
     url: 'https://github.com/encounter/objdiff',
     repo: 'encounter/objdiff',
-    desc: 'Local diffing tool for decompilation projects',
+    desc: 'Diffing tool for decompilation projects',
     langs: [LANG.Rust, LANG.TypeScript],
     body: `
-      <p><code>objdiff</code> compares object files across functions and data. It supports ARM, ARM64, MIPS, PowerPC, SuperH, and x86(-64), and provides a GUI, TUI, and JSON output for integration with other tools and agentic workflows.</p>
+      <p><code>objdiff</code> compares object files across functions and data. It supports ARM, ARM64, MIPS, PowerPC, SuperH, and x86(-64). It provides a GUI, TUI, and JSON output for integration with other tools and agentic workflows.</p>
       <p>The core diffing engine compiles to WASM and runs as a <a href="https://github.com/encounter/objdiff-web">web frontend</a> in <a href="https://decomp.me">decomp.me</a> and as a <a href="https://marketplace.visualstudio.com/items?itemName=decomp-dev.objdiff">VS Code extension</a>. Its progress reporting system powers <a href="https://decomp.dev">decomp.dev</a>.</p>
-      <p class="project-meta">Inspired by <a href="https://decomp.me">decomp.me</a> and <a href="https://github.com/simonlindholm/asm-differ">asm-differ</a>.</p>
     `,
     images: [
       {
@@ -65,8 +64,7 @@ export const projects: Project[] = [
     langs: [LANG.Rust],
     body: `
       <p><code>decomp.dev</code> tracks progress for more than 80 decompilation projects. With data driven by <code>objdiff</code>'s progress reports, it provides granular information down to individual translation units and functions, plus a tree view for exploring project structure. Projects can categorize units, track multiple game versions, and navigate full commit-by-commit history.</p>
-      <p>All of this information is also exposed through its API, along with a badge system for embedding live progress in project <code>README</code>s.</p>
-      <p class="project-meta">Written in Rust with Axum.</p>
+      <p>All of this information is also exposed through its <a href="https://decomp.dev/api">API</a>, along with a badge system for embedding live progress in project <code>README</code>s.</p>
     `,
     images: [
       {
@@ -110,11 +108,11 @@ export const projects: Project[] = [
     name: 'nod',
     url: 'https://github.com/encounter/nod',
     repo: 'encounter/nod',
-    desc: 'GameCube and Wii disc image Rust library and CLI tool',
+    desc: 'GameCube and Wii disc image library and CLI tool',
     langs: [LANG.Rust],
     body: `
       <p><code>nod</code> supports reading and converting all GameCube and Wii disc image formats, with a simple and performant API. Open any disc image and get a <code>Read + Seek + BufRead</code> handle. Converting to ISO is just reading from that handle and writing to a file, regardless of the source format. Open a partition and get the same interface, transparently handling Wii encryption and hashing.</p>
-      <p>Reading and writing are both multithreaded, and <code>nod</code> produces smaller disc images faster than both Dolphin and NKit v2. C bindings are available for FFI.</p>
+      <p>Reading and writing are multithreaded, and <code>nod</code> produces smaller disc images faster than both Dolphin and NKit v2. C bindings are available for FFI.</p>
     `,
     meta: 'Used by <a href="https://github.com/mq1/TinyWiiBackupManager">TinyWiiBackupManager</a>.',
   },
@@ -122,7 +120,7 @@ export const projects: Project[] = [
     name: 'powerpc-rs',
     url: 'https://github.com/encounter/powerpc-rs',
     repo: 'encounter/powerpc-rs',
-    desc: 'PowerPC disassembler and assembler in Rust',
+    desc: 'PowerPC disassembler and assembler',
     langs: [LANG.Rust],
     body: `
       <p><code>powerpc-rs</code> is driven by a declarative instruction set definition that is compiled into Rust at build time, similar to LLVM's TableGen. It supports the full PowerPC instruction set along with Gekko/Broadway paired singles (GameCube/Wii) and Xenon VMX128 (Xbox 360) extensions.</p>
@@ -139,7 +137,7 @@ export const projects: Project[] = [
     body: `
       <p><code>ghidra-panel</code> integrates with Ghidra Server through an in-process gRPC plugin, allowing repository administrators to manage users and permissions. Users authenticate with Discord and can request repository access, sending a notification with a one-click approval link for admins.</p>
     `,
-    meta: 'Powers the collaboration infrastructure on <a href="https://decomp.dev">decomp.dev</a>.',
+    meta: 'Powers the collaboration infrastructure on <a href="https://ghidra.decomp.dev">decomp.dev</a>.',
     images: [
       {
         src: ghidraPanelHome,
@@ -157,7 +155,7 @@ export const projects: Project[] = [
     name: 'aurora',
     url: 'https://github.com/encounter/aurora',
     repo: 'encounter/aurora',
-    desc: 'Source-level GameCube & Wii compatibility layer for use with decompilation projects',
+    desc: 'Source-level GameCube & Wii compatibility layer for decompilation projects',
     langs: [LANG.Cpp],
     body: `
       <p>Aurora reimplements the GX API, translating the calls to native graphics backends like Vulkan, Metal, D3D12, and WebGPU.</p>
