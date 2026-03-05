@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/projects';
+---
+
+<Layout
+  title="@encounter &middot; Luke Street"
+  description="I build tools for decompilation and game reverse engineering, with a focus on GameCube and Wii."
+>
+  <p class="intro">
+    I build tools for decompilation and game reverse engineering, with a focus on GameCube and Wii.
+  </p>
+
+  <div class="social-links">
+    <a href="https://github.com/encounter">GitHub</a>
+    <span class="sep">&middot;</span>
+    <a href="https://discord.com/users/130490603749376000">Discord</a>
+  </div>
+
+  <h1 class="section-heading">Projects</h1>
+
+  {projects.map((project) => (
+    <ProjectCard project={project} />
+  ))}
+</Layout>
+
+<style>
+  .intro {
+    font-size: 1.125rem;
+    color: var(--gray-700);
+    line-height: 1.6;
+    margin-bottom: .5rem;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .intro {
+      color: var(--gray-600);
+    }
+  }
+
+  .social-links {
+    font-family: var(--heading-font);
+    font-size: .8125rem;
+    margin-bottom: var(--spacer-2);
+  }
+
+  .social-links a {
+    text-decoration: none;
+    color: var(--gray-500);
+    transition: color 0.15s ease;
+  }
+
+  .social-links a:hover,
+  .social-links a:focus {
+    color: var(--accent);
+  }
+
+  .sep {
+    color: var(--gray-500);
+    font-family: var(--heading-font);
+    font-size: .8125rem;
+  }
+
+  .section-heading {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-500);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: .5rem;
+    margin-top: var(--spacer-2);
+    margin-bottom: var(--spacer-2);
+  }
+</style>

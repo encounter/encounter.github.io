@@ -1,0 +1,109 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-precomposed.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="darkreader-lock" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="masthead">
+        <h3 class="masthead-title">
+          <a href="/"><span class="prompt">&gt;</span> @encounter</a>
+          <small>Luke Street</small>
+        </h3>
+      </header>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer>
+        <small>&copy; {year}</small>
+      </footer>
+    </div>
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>
+
+<style>
+  .container {
+    max-width: 48rem;
+    padding-left: var(--spacer-2);
+    padding-right: var(--spacer-2);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .masthead {
+    padding-top: var(--spacer-3);
+    padding-bottom: var(--spacer-2);
+    margin-bottom: var(--spacer-2);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .masthead-title {
+    margin-bottom: 0;
+    font-family: var(--heading-font);
+  }
+
+  .masthead-title a {
+    color: var(--heading-color);
+    text-decoration: none;
+  }
+
+  .masthead-title a:hover,
+  .masthead-title a:focus {
+    color: var(--accent);
+  }
+
+  .prompt {
+    color: var(--green);
+    user-select: none;
+  }
+
+  .masthead-title small {
+    display: block;
+    margin-top: .25rem;
+    font-family: var(--body-font);
+    font-weight: 400;
+    font-size: .875rem;
+    color: var(--gray-500);
+    letter-spacing: 0.02em;
+  }
+
+  footer {
+    margin-top: var(--spacer-3);
+    padding-top: var(--spacer-2);
+    padding-bottom: var(--spacer-3);
+    border-top: 1px solid var(--border-color);
+    font-family: var(--heading-font);
+    font-size: .75rem;
+    color: var(--gray-500);
+  }
+</style>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

@@ -1,0 +1,187 @@
+---
+import { Image } from 'astro:assets';
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="project">
+  <div class="project-badges">
+    <span class="project-langs">
+      {project.langs.map((lang) => (
+        <span class="lang">
+          <span class="lang-dot" style={`background-color: ${lang.color}`} />
+          {lang.name}
+        </span>
+      ))}
+    </span>
+    <span class="github-star">
+      <a
+        class="github-button"
+        href={`https://github.com/${project.repo}`}
+        data-color-scheme="no-preference: dark_dimmed; light: light; dark: dark_dimmed;"
+        data-icon="octicon-star"
+        data-show-count="true"
+        aria-label={`Star ${project.repo} on GitHub`}
+      >Star</a>
+    </span>
+  </div>
+
+  <h2><a href={project.url}>{project.name}</a></h2>
+  <p class="project-desc">{project.desc}</p>
+
+  <Fragment set:html={project.body} />
+
+  {project.meta && (
+    <p class="project-meta" set:html={project.meta} />
+  )}
+
+  {project.images && (
+    <div class="project-images">
+      {project.images.map((img) => (
+        <a href={img.href} target="_blank" rel={img.rel}>
+          <Image src={img.src} alt={img.alt} width={800} />
+        </a>
+      ))}
+    </div>
+  )}
+</article>
+
+<style>
+  .project {
+    position: relative;
+    padding: var(--spacer-2);
+    margin-bottom: var(--spacer);
+    background: var(--surface-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--gray-400);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    .project:hover {
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: .25rem;
+    font-size: 1.125rem;
+  }
+
+  h2 a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* Stretch h2 link over the whole card */
+  h2 a::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    border-radius: var(--border-radius);
+  }
+
+  /* All other interactive elements sit above the stretched link */
+  .project :global(p a),
+  .project-meta :global(a),
+  .project-images a,
+  .project-badges {
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-desc {
+    font-size: .9375rem;
+    color: var(--gray-600);
+    font-style: italic;
+    margin-bottom: .75rem;
+  }
+
+
+  .project :global(p) {
+    font-size: .9375rem;
+    margin-bottom: .75rem;
+  }
+
+  .project :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .project-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    margin-top: .75rem;
+    margin-bottom: 0;
+  }
+
+  .project-images a {
+    display: block;
+  }
+
+  .project-images :global(img) {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    border-radius: calc(var(--border-radius) - 1px);
+    margin-bottom: 0;
+  }
+
+  .project :global(.project-meta) {
+    font-size: .8125rem;
+    color: var(--gray-500);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  .project-badges {
+    position: absolute;
+    top: var(--spacer-2);
+    right: var(--spacer-2);
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+  }
+
+  .github-star {
+    line-height: 0;
+  }
+
+  .project-langs {
+    display: flex;
+    gap: .5rem;
+    font-family: var(--heading-font);
+    font-size: .6875rem;
+    color: var(--gray-500);
+    line-height: 1;
+  }
+
+  .lang {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+  }
+
+  .lang-dot {
+    display: inline-block;
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+  }
+</style>
