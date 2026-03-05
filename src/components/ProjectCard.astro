@@ -151,12 +151,20 @@ const { project } = Astro.props;
   }
 
   .project-badges {
-    position: absolute;
-    top: var(--spacer-2);
-    right: var(--spacer-2);
     display: flex;
     align-items: center;
     gap: .75rem;
+    float: right;
+    margin-left: 1rem;
+  }
+
+  @media (max-width: 30em) {
+    .project-badges {
+      float: none;
+      margin-left: 0;
+      margin-bottom: .5rem;
+      justify-content: space-between;
+    }
   }
 
   .github-star {
