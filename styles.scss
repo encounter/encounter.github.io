@@ -29,6 +29,59 @@
 @import "message";
 @import "toc";
 
+// Project cards
+.page h2 {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+
+  &:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
+// "Powers..." / "Used by..." lines
+.page p:last-of-type em,
+.page p > a:only-child {
+  // Handled by structure
+}
+
+.page h2 + p > strong {
+  color: var(--gray-600);
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page h2 + p > strong {
+    color: var(--gray-500);
+  }
+}
+
+// Masthead
+.masthead {
+  padding-bottom: var(--spacer-2);
+  margin-bottom: var(--spacer-2);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.masthead-title {
+  font-size: 1.5rem;
+
+  small {
+    font-size: .85rem;
+  }
+}
+
 // Sass for creating the swatches
 .colors {
   display: grid;
