@@ -1,54 +1,66 @@
 ---
-import { Image } from 'astro:assets';
-import type { Project } from '../data/projects';
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { marked } from "marked";
 
 interface Props {
-  project: Project;
+  project: CollectionEntry<"projects">;
 }
 
 const { project } = Astro.props;
+const { Content } = await project.render();
+
+// Render meta as markdown inline
+const metaHtml = project.data.meta
+  ? marked.parseInline(project.data.meta)
+  : null;
 ---
 
 <article class="project">
+  <h2><a href={project.data.url}>{project.data.name}</a></h2>
+
   <div class="project-badges">
     <span class="project-langs">
-      {project.langs.map((lang) => (
-        <span class="lang">
-          <span class="lang-dot" style={`background-color: ${lang.color}`} />
-          {lang.name}
-        </span>
-      ))}
+      {
+        project.data.langs.map((lang) => (
+          <span class="lang">
+            <span class="lang-dot" style={`background-color: ${lang.color}`} />
+            <span class="lang-name">{lang.name}</span>
+          </span>
+        ))
+      }
     </span>
     <span class="github-star">
       <a
         class="github-button"
-        href={`https://github.com/${project.repo}`}
+        href={`https://github.com/${project.data.repo}`}
         data-color-scheme="no-preference: dark_dimmed; light: light; dark: dark_dimmed;"
         data-icon="octicon-star"
         data-show-count="true"
-        aria-label={`Star ${project.repo} on GitHub`}
-      >Star</a>
+        aria-label={`Star ${project.data.repo} on GitHub`}>Star</a
+      >
     </span>
   </div>
 
-  <h2><a href={project.url}>{project.name}</a></h2>
-  <p class="project-desc">{project.desc}</p>
+  <p class="project-desc">{project.data.desc}</p>
 
-  <Fragment set:html={project.body} />
+  <div class="project-body">
+    <Content />
+  </div>
 
-  {project.meta && (
-    <p class="project-meta" set:html={project.meta} />
-  )}
+  {metaHtml && <p class="project-meta" set:html={metaHtml} />}
 
-  {project.images && (
-    <div class="project-images">
-      {project.images.map((img) => (
-        <a href={img.href} target="_blank" rel={img.rel}>
-          <Image src={img.src} alt={img.alt} width={800} />
-        </a>
-      ))}
-    </div>
-  )}
+  {
+    project.data.images && (
+      <div class="project-images">
+        {project.data.images.map((img) => (
+          <a href={img.href} target="_blank" rel={img.rel}>
+            <Image src={img.src} alt={img.alt} width={800} />
+          </a>
+        ))}
+      </div>
+    )
+  }
 </article>
 
 <style>
@@ -59,17 +71,23 @@ const { project } = Astro.props;
     background: var(--surface-bg);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
     cursor: pointer;
 
-    &:hover {
+    &:hover:not(:has(.project-body a:hover)):not(
+        :has(.project-meta a:hover)
+      ):not(:has(.project-badges:hover)):not(:has(.project-images:hover)) {
       border-color: var(--gray-400);
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     }
   }
 
   @media (prefers-color-scheme: light) {
-    .project:hover {
+    .project:hover:not(:has(.project-body a:hover)):not(
+        :has(.project-meta a:hover)
+      ):not(:has(.project-badges:hover)):not(:has(.project-images:hover)) {
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
     }
   }
@@ -77,18 +95,26 @@ const { project } = Astro.props;
   @media (max-width: 30em) {
     .project {
       padding: var(--spacer);
+      display: flex;
+      flex-direction: column;
     }
   }
 
   h2 {
     margin-top: 0;
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
     font-size: 1.125rem;
   }
 
   h2 a {
     color: var(--accent);
     text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  h2 a:hover,
+  h2 a:focus {
+    color: var(--link-hover-color);
   }
 
   /* Stretch h2 link over the whole card */
@@ -104,7 +130,7 @@ const { project } = Astro.props;
   }
 
   /* All other interactive elements sit above the stretched link */
-  .project :global(p a),
+  .project-body :global(a),
   .project-meta :global(a),
   .project-images a,
   .project-badges {
@@ -113,32 +139,36 @@ const { project } = Astro.props;
   }
 
   .project-desc {
-    font-size: .9375rem;
+    font-size: 0.9375rem;
     color: var(--gray-600);
     font-style: italic;
-    margin-bottom: .75rem;
+    margin-bottom: 0.75rem;
   }
 
-
-  .project :global(p) {
-    font-size: .9375rem;
-    margin-bottom: .75rem;
+  .project-body:not(:last-child) {
+    margin-bottom: 0.75rem;
   }
 
-  .project :global(p:last-child) {
+  .project-body :global(p) {
+    font-size: 0.9375rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-body :global(p:last-child) {
     margin-bottom: 0;
   }
 
   .project-images {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: .5rem;
-    margin-top: .75rem;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
     margin-bottom: 0;
   }
 
   .project-images a {
     display: block;
+    border-radius: calc(var(--border-radius) - 1px);
   }
 
   .project-images :global(img) {
@@ -147,27 +177,50 @@ const { project } = Astro.props;
     border: 1px solid var(--border-color);
     border-radius: calc(var(--border-radius) - 1px);
     margin-bottom: 0;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .project-images a:hover :global(img),
+  .project-images a:focus :global(img) {
+    border-color: var(--gray-400);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (prefers-color-scheme: light) {
+    .project-images a:hover :global(img),
+    .project-images a:focus :global(img) {
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    }
   }
 
   .project :global(.project-meta) {
-    font-size: .8125rem;
+    font-size: 0.8125rem;
     color: var(--gray-500);
     font-style: italic;
     margin-bottom: 0;
   }
 
   .project-badges {
+    position: absolute;
+    top: var(--spacer-2);
+    right: var(--spacer-2);
     display: flex;
     flex-wrap: wrap;
-    gap: .75rem;
-    float: right;
+    gap: 0.75rem;
   }
 
   @media (max-width: 30em) {
     .project-badges {
-      float: none;
+      position: static;
       margin-bottom: 1rem;
       justify-content: space-between;
+      order: -1;
+    }
+
+    h2 {
+      order: 0;
     }
   }
 
@@ -175,25 +228,38 @@ const { project } = Astro.props;
     line-height: 0;
   }
 
+  /* If the GitHub button fails to load, hide the container */
+  .github-star:has(> a) {
+    display: none;
+  }
+
   .project-langs {
+    --lang-optical-nudge: clamp(0px, 0.12em, 0.7px);
     display: flex;
-    gap: .5rem;
+    gap: 0.5rem;
     font-family: var(--heading-font);
-    font-size: .6875rem;
+    font-size: 0.6875rem;
     color: var(--gray-500);
     line-height: 1;
   }
 
   .lang {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: .3rem;
+    gap: 0.3rem;
+  }
+
+  .lang-name {
+    display: inline-block;
+    line-height: 1;
+    transform: translateY(var(--lang-optical-nudge));
   }
 
   .lang-dot {
-    display: inline-block;
-    width: .5rem;
-    height: .5rem;
+    display: block;
+    flex: 0 0 0.5rem;
+    width: 0.5rem;
+    height: 0.5rem;
     border-radius: 50%;
   }
 </style>

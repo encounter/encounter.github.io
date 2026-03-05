@@ -1,15 +1,20 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import { projects } from '../data/projects';
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 ---
 
 <Layout
-  title="@encounter &middot; Luke Street"
+  title="@encounter · Luke Street"
   description="I build tools for game decompilation and reverse engineering, with a focus on GameCube and Wii."
 >
   <p class="intro">
-    I build tools for game decompilation and reverse engineering, with a focus on GameCube and Wii.
+    I build tools for game decompilation and reverse engineering, with a focus
+    on GameCube and Wii.
   </p>
 
   <div class="social-links">
@@ -20,9 +25,7 @@ import { projects } from '../data/projects';
 
   <h1 class="section-heading">Projects</h1>
 
-  {projects.map((project) => (
-    <ProjectCard project={project} />
-  ))}
+  {projects.map((project) => <ProjectCard project={project} />)}
 </Layout>
 
 <style>
@@ -30,7 +33,7 @@ import { projects } from '../data/projects';
     font-size: 1.125rem;
     color: var(--gray-700);
     line-height: 1.6;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 
   @media (prefers-color-scheme: light) {
@@ -41,7 +44,7 @@ import { projects } from '../data/projects';
 
   .social-links {
     font-family: var(--heading-font);
-    font-size: .8125rem;
+    font-size: 0.8125rem;
     margin-bottom: var(--spacer-2);
   }
 
@@ -59,7 +62,7 @@ import { projects } from '../data/projects';
   .sep {
     color: var(--gray-500);
     font-family: var(--heading-font);
-    font-size: .8125rem;
+    font-size: 0.8125rem;
   }
 
   .section-heading {
@@ -69,7 +72,7 @@ import { projects } from '../data/projects';
     letter-spacing: 0.08em;
     color: var(--gray-500);
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: .5rem;
+    padding-bottom: 0.5rem;
     margin-top: var(--spacer-2);
     margin-bottom: var(--spacer);
   }
