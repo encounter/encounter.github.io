@@ -57,10 +57,14 @@ const year = new Date().getFullYear();
   }
 
   .masthead {
-    padding-top: var(--spacer-3);
+    padding-top: var(--spacer-2);
     padding-bottom: var(--spacer-2);
-    margin-bottom: var(--spacer-2);
-    border-bottom: 1px solid var(--border-color);
+  }
+
+  @media (max-width: 30em) {
+    .masthead {
+      padding-top: var(--spacer);
+    }
   }
 
   .masthead-title {
@@ -79,7 +83,7 @@ const year = new Date().getFullYear();
   }
 
   .prompt {
-    color: var(--green);
+    color: var(--accent);
     user-select: none;
   }
 
@@ -94,9 +98,8 @@ const year = new Date().getFullYear();
   }
 
   footer {
-    margin-top: var(--spacer-3);
-    padding-top: var(--spacer-2);
-    padding-bottom: var(--spacer-3);
+    padding-top: var(--spacer);
+    padding-bottom: var(--spacer-2);
     border-top: 1px solid var(--border-color);
     font-family: var(--heading-font);
     font-size: .75rem;
