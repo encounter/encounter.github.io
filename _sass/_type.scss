@@ -1,26 +1,24 @@
-// Typography
-//
-// Headings, body text, lists, and other misc typographic elements.
-
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: .5rem;
+  font-family: var(--heading-font);
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.3;
   color: var(--heading-color);
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.75rem;
+  letter-spacing: -0.01em;
 }
 
 h2 {
   margin-top: 2.5rem;
-  font-size: 1.5rem;
+  font-size: 1.375rem;
 }
 
 h3 {
   margin-top: 1.5rem;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
 }
 
 h4, h5, h6 {
@@ -69,7 +67,7 @@ blockquote {
   padding: .5rem 1rem;
   margin: .8rem 0;
   color: var(--gray-500);
-  border-left: .25rem solid var(--border-color);
+  border-left: .25rem solid var(--accent);
 
   p:last-child {
     margin-bottom: 0;
@@ -85,31 +83,25 @@ figure {
   margin: 0;
 }
 
-
-// Markdown footnotes
-//
-// See the example content post for an example.
-
-// Footnote number within body text
 a[href^="#fn:"],
-// Back to footnote link
 a[href^="#fnref:"] {
   display: inline-block;
   margin-left: .1rem;
   font-weight: bold;
 }
 
-// List of footnotes
 .footnotes {
   margin-top: 2rem;
   font-size: 85%;
 }
 
-// Custom type
-//
-// Extend paragraphs with `.lead` for larger introductory text.
-
 .lead {
-  font-size: 1.25rem;
-  font-weight: 300;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--gray-600);
+  line-height: 1.6;
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--gray-700);
+  }
 }

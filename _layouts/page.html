@@ -3,6 +3,8 @@ layout: default
 ---
 
 <article class="page">
+  {% unless page.title == "About" %}
   <h1 class="page-title">{{ page.title }}</h1>
+  {% endunless %}
   {{ content }}
 </article>

@@ -1,48 +1,45 @@
 :root {
-  --gray-000: #f8f9fa;
-  --gray-100: #f1f3f5;
-  --gray-200: #e9ecef;
-  --gray-300: #dee2e6;
-  --gray-400: #ced4da;
-  --gray-500: #adb5bd;
-  --gray-600: #868e96;
-  --gray-700: #495057;
-  --gray-800: #343a40;
-  --gray-900: #212529;
+  --gray-000: #f6f8fa;
+  --gray-100: #eaeef2;
+  --gray-200: #d0d7de;
+  --gray-300: #afb8c1;
+  --gray-400: #8c959f;
+  --gray-500: #6e7781;
+  --gray-600: #57606a;
+  --gray-700: #424a53;
+  --gray-800: #32383f;
+  --gray-900: #24292f;
 
-  --red: #fa5252;
-  --pink: #e64980;
-  --grape: #be4bdb;
-  --purple: #7950f2;
-  --indigo: #4c6ef5;
-  --blue: #228be6;
-  --cyan: #15aabf;
-  --teal: #12b886;
-  --green: #40c057;
-  --yellow: #fab005;
-  --orange: #fd7e14;
+  --green: #1a7f37;
+  --cyan: #0550ae;
+  --red: #cf222e;
+  --purple: #8250df;
+  --orange: #bc4c00;
+  --yellow-100: #fff8c5;
 
-  --blue-300: #74c0fc;
-  --blue-400: #4dabf7;
-  --yellow-100: #fff3bf;
-
-  --body-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --body-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  --heading-font: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --code-font: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   --body-font-size: 16px;
-  --body-line-height: 1.5;
-  --body-color: var(--gray-700);
-  --body-bg: #fff;
+  --body-line-height: 1.6;
 
-  --link-color: var(--blue);
-  --link-hover-color: #1c7ed6;
+  --body-color: var(--gray-700);
+  --body-bg: #ffffff;
+  --surface-bg: var(--gray-000);
+
+  --link-color: #0969da;
+  --link-hover-color: #0550ae;
 
   --heading-color: var(--gray-900);
 
-  --border-color: var(--gray-300);
-  --border-radius: .25rem;
+  --border-color: var(--gray-200);
+  --border-radius: .375rem;
 
-  --code-font: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --code-color: var(--grape);
+  --code-color: var(--purple);
   --code-bg: var(--gray-000);
+
+  --accent: #0969da;
+  --accent-subtle: rgba(9, 105, 218, 0.1);
 
   --spacer: 1rem;
   --spacer-2: calc(var(--spacer) * 1.5);
@@ -51,16 +48,38 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --body-color: var(--gray-300);
-    --body-bg: var(--gray-800);
+    --gray-000: #0d1117;
+    --gray-100: #161b22;
+    --gray-200: #21262d;
+    --gray-300: #30363d;
+    --gray-400: #484f58;
+    --gray-500: #6e7681;
+    --gray-600: #8b949e;
+    --gray-700: #b1bac4;
+    --gray-800: #c9d1d9;
+    --gray-900: #e6edf3;
 
-    --heading-color: #fff;
+    --green: #3fb950;
+    --cyan: #58a6ff;
+    --red: #f85149;
+    --purple: #bc8cff;
+    --orange: #d29922;
 
-    --link-color: var(--blue-300);
-    --link-hover-color: var(--blue-400);
+    --body-color: var(--gray-800);
+    --body-bg: var(--gray-000);
+    --surface-bg: var(--gray-100);
 
-    --border-color: rgba(255,255,255,.15);
+    --link-color: #58a6ff;
+    --link-hover-color: #79c0ff;
 
-    --code-bg: var(--gray-900);
+    --heading-color: var(--gray-900);
+
+    --border-color: var(--gray-300);
+
+    --code-color: var(--purple);
+    --code-bg: var(--gray-100);
+
+    --accent: #58a6ff;
+    --accent-subtle: rgba(56, 139, 253, 0.1);
   }
 }
